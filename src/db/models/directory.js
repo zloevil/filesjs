@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose'
 
-const File = new Schema({
+const Directory = new Schema({
   name: {
     type: String,
     required: true,
@@ -15,10 +15,6 @@ const File = new Schema({
     default: null,
     required: true,
   },
-  isZipped: {
-    type: Boolean,
-    default: true,
-  },
   createdAt: {
     type: Date,
     default: Date.now,
@@ -28,4 +24,4 @@ const File = new Schema({
 
 // TODO: Write virtual methods for file managing
 
-mongoose.model('File', File)
+mongoose.model('Directory', Directory)
