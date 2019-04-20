@@ -25,5 +25,5 @@ middlewares.forEach(middleware => {
 app.use(require('./src/routes').routes())
 app.use(require('./src/routes').allowedMethods())
 
-app.listen(config.port)
+app.listen(config.server.port)
 log.info(`Server run on port ${config.server.port}`)

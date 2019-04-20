@@ -7,6 +7,9 @@
   "author": "Sergey Suslov & Kukhtin Vasily",
   "license": "MIT",
   "private": false,
+  "scripts": {
+    "start": "nodemon hook.js"
+  },
   "dependencies": {
     "@babel/preset-env": "^7.2.3",
     "babel-cli": "^6.26.0",
@@ -43,6 +46,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-security": "^1.4.0",
+    "nodemon": "^1.18.11",
     "trace": "^3.1.1"
   }
 }
