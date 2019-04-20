@@ -5,11 +5,6 @@ const Directory = new Schema({
     type: String,
     required: true,
   },
-  status: {
-    type: String,
-    default: 'uploading',
-    enum: ['uploading', 'uploaded', 'deleting', 'deleted'],
-  },
   directory: {
     type: Schema.Types.ObjectId,
     default: null,
