@@ -7,6 +7,7 @@ import fs from 'fs'
 import './src/db'
 
 const log = log4js.getLogger('app>')
+// noinspection JSUnresolvedVariable
 log.level = config.logger.logLevel
 
 
