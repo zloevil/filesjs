@@ -4,6 +4,7 @@ import config from 'config'
 import Koa from 'koa'
 import path from 'path'
 import fs from 'fs'
+import './src/db'
 
 const log = log4js.getLogger('app>')
 log.level = config.logger.logLevel
