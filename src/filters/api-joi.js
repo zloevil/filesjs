@@ -1,11 +1,7 @@
 import Joi from 'joi'
-import * as log4js from 'log4js'
-import config from 'config'
 import Boom from 'boom'
 import { MongooseObjectIdJoi } from './custom-jois'
 
-const log = log4js.getLogger('api-joi>')
-log.level = config.logger.logLevel
 
 // TODO: eslint disabled
 // eslint-disable-next-line
@@ -17,7 +13,6 @@ export const uploadFile = async (ctx, next) => {
   })
 
   // Types.ObjectId.isValid
-  log.info(ctx.request)
   if (Joi.validate({ ...ctx.request.body, file: ctx.request.files.file }, schema).error !== null) {
     throw Boom.badRequest('Invalid body!')
   }

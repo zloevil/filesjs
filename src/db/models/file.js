@@ -4,10 +4,7 @@ import config from 'config'
 import path from 'path'
 import fs from 'fs-extra'
 import Boom from 'boom'
-import * as log4js from 'log4js'
 
-const log = log4js.getLogger('file>')
-log.level = config.logger.logLevel
 
 const file = new Schema({
   name: {
