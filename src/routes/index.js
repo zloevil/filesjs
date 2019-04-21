@@ -7,9 +7,6 @@ const log = log4js.getLogger('routers')
 log.level = config.logger.logLevel
 
 const router = new Router()
-router.use(async () => {
-  log.info('INSIDE')
-})
-router.use('/api', api.routes(), api.allowedMethods())
+router.use(api.routes(), api.allowedMethods())
 
 module.exports = router

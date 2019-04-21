@@ -24,7 +24,8 @@ module.exports = async (ctx, next) => {
       ctx.app.emit('error', err, ctx)
       return
     }
-    ctx.status = 500
-    ctx.body = Boom.internal('Something went wrong').output.payload
+    const { output: internalErrorOutput } = Boom.internal('Something went wrong')
+    ctx.status = internalErrorOutput.statusCode
+    ctx.body = internalErrorOutput.payload
   }
 }
