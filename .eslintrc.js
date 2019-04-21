@@ -7,6 +7,10 @@ module.exports = {
       2,
       'as-needed'
     ],
+    'no-underscore-dangle': [
+      0,
+      'never'
+    ],
     semi: [
       2,
       'never'

@@ -1,9 +1,19 @@
 import mongoose, { Schema } from 'mongoose'
+import zlib from 'zlib'
+import config from 'config'
+import path from 'path'
+import fs from 'fs-extra'
+import Boom from 'boom'
+import * as log4js from 'log4js'
+
+const log = log4js.getLogger('file>')
+log.level = config.logger.logLevel
 
 const file = new Schema({
   name: {
     type: String,
     required: true,
+    index: true,
   },
   status: {
     type: String,
@@ -13,7 +23,6 @@ const file = new Schema({
   directory: {
     type: Schema.Types.ObjectId,
     default: null,
-    required: true,
   },
   isZipped: {
     type: Boolean,
@@ -26,6 +35,38 @@ const file = new Schema({
   },
 })
 
-// TODO: Write virtual methods for file managing
+file.methods.uploadFile = function (fileStream) {
+  const element = this
+  let stream = fileStream
+  return new Promise(async res => {
+    try {
+      await fs.ensureDir(config.storage.path)
+    } catch (e) {
+      throw Boom.internal('Could not write file on disk', e)
+    }
+    const dest = await fs.createWriteStream(await element.resolveFilePath())
+    if (element.isZipped) {
+      stream = stream
+        .pipe(zlib.createGzip())
+    }
+    stream
+      .pipe(zlib.createGzip())
+      .pipe(dest)
+      .on('error', e => {
+        throw Boom.internal('Could not write file on disk', e)
+      })
+      .on('finish', () => {
+        res()
+      })
+  })
+}
+
+file.methods.removeFileFromDisk = async function () {
+  await fs.remove(await this.resolveFilePath())
+}
+
+file.methods.resolveFilePath = async function () {
+  return path.resolve(config.storage.path, this._id.toString())
+}
 
 mongoose.model('File', file)

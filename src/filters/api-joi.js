@@ -13,11 +13,12 @@ export const uploadFile = async (ctx, next) => {
   const schema = Joi.object().keys({
     directory: MongooseObjectIdJoi.string().isMongoObjectId(),
     name: Joi.string().required(),
+    file: Joi.any().required(),
   })
 
   // Types.ObjectId.isValid
   log.info(ctx.request)
-  if (Joi.validate(ctx.request.body, schema).error !== null) {
+  if (Joi.validate({ ...ctx.request.body, file: ctx.request.files.file }, schema).error !== null) {
     throw Boom.badRequest('Invalid body!')
   }
   await next()

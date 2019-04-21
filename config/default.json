@@ -2,6 +2,9 @@
   "logger": {
     "logLevel": "all"
   },
+  "storage": {
+    "path": "../files-js"
+  },
   "server": {
     "port": 8080
   },
