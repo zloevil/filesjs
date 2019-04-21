@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose'
 
-const File = new Schema({
+const file = new Schema({
   name: {
     type: String,
     required: true,
@@ -28,4 +28,4 @@ const File = new Schema({
 
 // TODO: Write virtual methods for file managing
 
-mongoose.model('File', File)
+mongoose.model('File', file)

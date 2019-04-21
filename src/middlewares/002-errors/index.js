@@ -19,7 +19,9 @@ module.exports = async (ctx, next) => {
         ctx.body = err.output.payload
       } else {
         ctx.status = err.status || 500
-        ctx.body = Boom.wrap(err, err.status, err.message).output.payload
+        ctx.body = Boom.boomify(err, { statusCode: err.status, message: err.message })
+          .output
+          .payload
       }
       ctx.app.emit('error', err, ctx)
       return
