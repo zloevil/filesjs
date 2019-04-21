@@ -5,7 +5,6 @@ import Koa from 'koa'
 import path from 'path'
 import fs from 'fs'
 import db from './src/db'
-import errors from './src/errors'
 import routing from './src/routes'
 
 const log = log4js.getLogger('app>')
@@ -24,7 +23,10 @@ middlewares.forEach(middleware => {
   // eslint-disable-next-line security/detect-non-literal-require
   app.use(require(`./src/middlewares/${middleware}`))
 })
-
+app.use(async (ctx, next) => {
+  log.info('INSIDE')
+  await next()
+})
 // routes
 app.use(routing.routes())
 app.use(routing.allowedMethods())

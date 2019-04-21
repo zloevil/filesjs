@@ -12,10 +12,10 @@ module.exports = async (ctx, next) => {
     if (err) {
       if (err.isBoom) {
         ctx.status = err.output.statusCode
-        ctx.response.headers = {
+        ctx.set({
           ...ctx.response.headers,
           ...err.output.headers,
-        }
+        })
         ctx.body = err.output.payload
       } else {
         ctx.status = err.status || 500
