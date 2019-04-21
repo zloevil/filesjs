@@ -16,6 +16,7 @@ export const uploadFile = async (ctx, next) => {
   })
 
   // Types.ObjectId.isValid
+  log.info(ctx.request)
   if (Joi.validate(ctx.request.body, schema).error !== null) {
     throw Boom.badRequest('Invalid body!')
   }

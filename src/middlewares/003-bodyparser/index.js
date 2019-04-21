@@ -1,3 +1,4 @@
-import bodyParser from 'koa-bodyparser'
+import koaBody from 'koa-body'
 
-module.exports = bodyParser()
+
+module.exports = koaBody({ multipart: true })

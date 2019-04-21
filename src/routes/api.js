@@ -10,8 +10,9 @@ log.level = config.logger.logLevel
 const uploadFile = async ctx => {
   log.info('Uploading file: begin')
   if (ctx.request.body.directory) {
-    await ctx.connection.model('Directory').checkExistence(ctx.request.body.directory)
+    await ctx.db.model('Directory').checkExistence(ctx.request.body.directory)
   }
+  log.info(ctx.request.files)
   ctx.body = 'FINISH'
 }
 
