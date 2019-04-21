@@ -23,10 +23,6 @@ middlewares.forEach(middleware => {
   // eslint-disable-next-line security/detect-non-literal-require
   app.use(require(`./src/middlewares/${middleware}`))
 })
-app.use(async (ctx, next) => {
-  log.info('INSIDE')
-  await next()
-})
 // routes
 app.use(routing.routes())
 app.use(routing.allowedMethods())
