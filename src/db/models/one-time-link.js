@@ -1,8 +1,12 @@
 import mongoose, { Schema } from 'mongoose'
 import crypto from 'crypto'
+import Boom from "boom";
 
 
-const generateHash = () => crypto.randomBytes(256).toString('base64')
+const generateHash = () => crypto
+  .randomBytes(256)
+  .toString('base64')
+  .replace(/\W/gm, '')
 
 const oneTimeLink = new Schema({
   hash: {
@@ -19,6 +23,7 @@ const oneTimeLink = new Schema({
   target: {
     type: Schema.Types.ObjectId,
     default: null,
+    ref: 'File',
   },
   lifeTime: {
     type: Number,
@@ -30,5 +35,11 @@ const oneTimeLink = new Schema({
     required: true,
   },
 })
+
+oneTimeLink.statics.checkExistence = async function (hash) {
+  const f = await this.findOne({ hash }).populate('target')
+  if (!f) throw Boom.resourceGone('Link has expired!', { hash })
+  return f
+}
 
 mongoose.model('OneTimeLink', oneTimeLink)

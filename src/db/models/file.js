@@ -66,6 +66,10 @@ file.methods.resolveFilePath = async function () {
 }
 
 file.methods.getFileStream = async function () {
+  if (this.isZipped) {
+    return fs.createReadStream(await this.resolveFilePath())
+      .pipe(zlib.createGunzip())
+  }
   return fs.createReadStream(await this.resolveFilePath())
 }
 

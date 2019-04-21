@@ -29,3 +29,14 @@ export const generateFileOneTimeLink = async (ctx, next) => {
   }
   await next()
 }
+
+export const hashValidation = async (ctx, next) => {
+  const schema = Joi.object().keys({
+    hash: Joi.string().required(),
+  })
+
+  if (Joi.validate({ hash: ctx.params.hash }, schema).error !== null) {
+    throw Boom.badRequest('Invalid body!')
+  }
+  await next()
+}
