@@ -1,6 +1,6 @@
 {
   "name": "filesjs",
-  "version": "0.0.1",
+  "version": "0.1.0a448",
   "description": "file service",
   "main": "hook.js",
   "repository": "https://github.com/zloevil/filesjs.git",

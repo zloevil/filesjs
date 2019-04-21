@@ -65,4 +65,19 @@ file.methods.resolveFilePath = async function () {
   return path.resolve(config.storage.path, this._id.toString())
 }
 
+file.methods.getFileStream = async function () {
+  if (this.isZipped) {
+    return fs.createReadStream(await this.resolveFilePath())
+      .pipe(zlib.createGunzip())
+  }
+  return fs.createReadStream(await this.resolveFilePath())
+}
+
+file.statics.checkExistence = async function (_id) {
+  const f = await this.findById(_id)
+  if (!f) throw Boom.resourceGone('File does not exists', { id: _id })
+  return f
+}
+
+
 mongoose.model('File', file)
