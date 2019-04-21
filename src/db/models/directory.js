@@ -1,6 +1,8 @@
 import mongoose, { Schema } from 'mongoose'
+import Boom from 'boom'
 
-const Directory = new Schema({
+
+const directory = new Schema({
   name: {
     type: String,
     required: true,
@@ -17,6 +19,10 @@ const Directory = new Schema({
   },
 })
 
-// TODO: Write virtual methods for file managing
+directory.statics.checkExistence = async function (_id) {
+  const dir = await this.findById(_id)
+  if (!dir) throw Boom.resourceGone('Directory does not exists', { id: _id })
+  return dir
+}
 
-mongoose.model('Directory', Directory)
+mongoose.model('Directory', directory)

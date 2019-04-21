@@ -1,7 +1,6 @@
 import mongoose from 'mongoose'
 import config from 'config'
 import * as log4js from 'log4js'
-import './models'
 
 
 const log = log4js.getLogger('db>')
@@ -20,5 +19,6 @@ db.on('disconnected', () => {
   log.warn('MongoDB, disconnected')
 })
 
+require('./models')
 
 export default db

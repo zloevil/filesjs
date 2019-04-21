@@ -1,5 +1,6 @@
 /* eslint-disable */
-require('babel-register')
+require('@babel/register')
+require('babel-polyfill')
 require('dotenv').config()
 
 if (process.env.TRACE) {
