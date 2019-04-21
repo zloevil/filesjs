@@ -1,4 +1,7 @@
-const bodyValidationError = ctx => ctx.throw(400, 'Invalid body!')
+import Boom from 'boom'
+
+
+const bodyValidationError = () => Boom.badRequest('Invalid body!')
 export default {
   bodyValidationError,
 }

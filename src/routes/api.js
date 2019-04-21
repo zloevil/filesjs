@@ -9,8 +9,8 @@ log.level = config.logger.logLevel
 
 const router = new Router()
 
-router.post('file', uploadFile, ctx => {
+router.post('/file', uploadFile, ctx => {
   log.info('FINAL')
 })
 
-module.exports = router
+export default router

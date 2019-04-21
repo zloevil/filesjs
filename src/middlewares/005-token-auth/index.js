@@ -1,10 +1,8 @@
 import config from 'config'
+import Boom from 'boom'
 
 
 module.exports = (ctx, next) => {
-  if (ctx.headers.token) {
-    ctx.assert(ctx.headers.token === config.api.token, 401, 'Assess denied!')
-    return
-  }
+  if (ctx.headers.token && ctx.headers.token !== config.api.token) throw Boom.unauthorized('Access denied!')
   next()
 }
