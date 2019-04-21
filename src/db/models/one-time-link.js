@@ -1,11 +1,15 @@
 import mongoose, { Schema } from 'mongoose'
+import crypto from 'crypto'
 
+
+const generateHash = () => crypto.randomBytes(256).toString('base64')
 
 const oneTimeLink = new Schema({
   hash: {
     type: String,
     required: true,
     index: true,
+    default: generateHash,
   },
   action: {
     type: String,
