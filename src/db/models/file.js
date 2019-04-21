@@ -47,7 +47,6 @@ file.methods.uploadFile = function (fileStream) {
         .pipe(zlib.createGzip())
     }
     stream
-      .pipe(zlib.createGzip())
       .pipe(dest)
       .on('error', e => {
         throw Boom.internal('Could not write file on disk', e)
