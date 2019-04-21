@@ -65,4 +65,8 @@ file.methods.resolveFilePath = async function () {
   return path.resolve(config.storage.path, this._id.toString())
 }
 
+file.methods.getFileStream = async function () {
+  return fs.createReadStream(await this.resolveFilePath())
+}
+
 mongoose.model('File', file)
