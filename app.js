@@ -4,7 +4,7 @@ import config from 'config'
 import Koa from 'koa'
 import path from 'path'
 import fs from 'fs'
-import './src/db'
+import db from './src/db'
 
 const log = log4js.getLogger('app>')
 // noinspection JSUnresolvedVariable
@@ -13,6 +13,7 @@ log.level = config.logger.logLevel
 
 const app = new Koa()
 app.keys = [config.secret]
+app.context.db = db
 
 // middlewares
 // eslint-disable-next-line security/detect-non-literal-fs-filename

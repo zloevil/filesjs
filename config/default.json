@@ -5,6 +5,9 @@
   "server": {
     "port": 8080
   },
+  "api": {
+    "token": "k109i1I()AIdas.d9i2391r21.kasmdkaj398r2j3irnASD@OJ!(R!)E("
+  },
   "mongodb": {
     "host": "mongodb://localhost",
     "dbName": "files-js"
