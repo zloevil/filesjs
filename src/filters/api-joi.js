@@ -1,7 +1,6 @@
 import Joi from 'joi'
 import * as log4js from 'log4js'
 import config from 'config'
-import errors from '../errors'
 import Boom from 'boom'
 
 const log = log4js.getLogger('api-joi>')

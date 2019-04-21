@@ -8,9 +8,9 @@ const log = log4js.getLogger('api>')
 log.level = config.logger.logLevel
 
 const router = new Router()
-
+router.prefix('/api')
 router.post('/file', uploadFile, ctx => {
-  log.info('FINAL')
+  log.info('Uploading file: begin')
 })
 
 export default router

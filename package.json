@@ -33,6 +33,7 @@
     "@types/koa-router": "^7.0.40",
     "@types/log4js": "^2.3.5",
     "@types/node": "^11.13.6",
+    "babel-eslint": "^10.0.1",
     "clarify": "^2.1.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
