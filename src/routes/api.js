@@ -4,7 +4,6 @@ import fs from 'fs-extra'
 import {
   uploadFile as uploadFileValidation,
   generateFileOneTimeLink as oneTimeLinkValidation,
-  hashValidation,
 } from '../filters/api-joi'
 
 
@@ -41,18 +40,9 @@ const generateFileOneTimeLink = async ctx => {
   ctx.body = JSON.stringify(oneTimeLink)
 }
 
-const sendFileByOneTimeLink = async ctx => {
-  const { hash } = ctx.params
-  const OneTimeLink = ctx.db.model('OneTimeLink')
-  const link = await OneTimeLink.checkExistence(hash)
-  ctx.body = await link.target.getFileStream()
-  link.remove()
-}
-
 const router = new Router()
 router.prefix('/api')
 router.post('/file', uploadFileValidation, uploadFile)
 router.get('/file/:id/generate-one-time-link', oneTimeLinkValidation, generateFileOneTimeLink)
-router.get('/file/:hash', hashValidation, sendFileByOneTimeLink)
 
 export default router
